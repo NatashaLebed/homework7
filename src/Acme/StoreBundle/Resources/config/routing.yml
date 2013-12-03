@@ -25,3 +25,7 @@ acme_store_fixture:
 acme_store_fixture_done:
     pattern:  /loaddemo
     defaults: { _controller: AcmeStoreBundle:Default:fixtureDone }
+
+acme_store_weather:
+    pattern:  /weather
+    defaults: { _controller: AcmeStoreBundle:Default:weather }

@@ -76,8 +76,6 @@ class DefaultController extends Controller
         $products = $em->getRepository('AcmeStoreBundle:Product')
                   ->findByCategory($id);
 
-
-
         return $this->render('AcmeStoreBundle:Default:allProductsOfCategory.html.twig', array(
             'category' => $category,
             'products' => $products
@@ -102,6 +100,14 @@ class DefaultController extends Controller
         return $this->render('AcmeStoreBundle:Default:fixture_done.html.twig');
     }
 
+    public function weatherAction()
+    {
+        $temp = $this->get('weather.service')->getWeather();
+        $city = $this->get('weather.service')->getCity();
+
+        return $this->render('AcmeStoreBundle:Default:weather.html.twig',  array('temp' => $temp, 'city'=>$city));
+
+    }
 
 }
 

@@ -1,7 +1,10 @@
 parameters:
-#    acme_store.example.class: Acme\StoreBundle\Example
+    weather.class: Acme\StoreBundle\Service\WeatherService
+    weather.city: Cherkassy
+    name: Cherkassy
 
 services:
-#    acme_store.example:
-#        class: %acme_store.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    weather.service:
+         class: "%weather.class%"
+         arguments:    ["%weather.city%"]
+         arguments:    ["%name%"]
