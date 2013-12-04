@@ -4,23 +4,22 @@ namespace Acme\StoreBundle\Service;
 
 
 class WeatherService {
-    private $name;
+    private $city;
 
-    public function __construct($name)
+    public function __construct($city)
     {
-        $this->name = $name;
+        $this->city = $city;
     }
 
     public function getCity()
     {
-        return $this->name;
+        return $this->city;
     }
 
     public function getWeather()
     {
         $url = "http://meteo.ua/56/cherkassyi";
         $code = file_get_contents($url);
-//        var_dump($code);
         preg_match("|<div class=\"win_tmp\">(.*)</div>|isU",$code,$match);
 
         return $match[1];

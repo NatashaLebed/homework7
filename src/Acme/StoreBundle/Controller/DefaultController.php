@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class DefaultController extends Controller
 {
@@ -102,12 +103,22 @@ class DefaultController extends Controller
 
     public function weatherAction()
     {
-        $temp = $this->get('weather.service')->getWeather();
+        $temperature = $this->get('weather.service')->getWeather();
         $city = $this->get('weather.service')->getCity();
 
-        return $this->render('AcmeStoreBundle:Default:weather.html.twig',  array('temp' => $temp, 'city'=>$city));
+        $session = $this->get('my_service')
+            ->getSession();
+
+        $user = $session->get('user');
+
+        return $this->render('AcmeStoreBundle:Default:weather.html.twig',
+            array('temperature' => $temperature,
+                'city'=>$city,
+                'user'=>$user,
+        ));
 
     }
+
 
 }
 
