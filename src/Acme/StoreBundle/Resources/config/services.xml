@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="weather.class">Acme\StoreBundle\Service\WeatherService</parameter>
+        <parameter key="weather.city">Cherkassy</parameter>
+        <parameter key="my_service.class">Acme\StoreBundle\Service\MyService</parameter>
+    </parameters>
+
+    <services>
+        <service id="weather.service" class="%weather.class%">
+            <argument>%weather.city</argument>
+        </service>
+
+        <service id="my_service" class="%my_service.class%">
+            <call method="setSession">
+                <argument type="service" id="session" />
+            </call>
+        </service>
+    </services>
+</container>

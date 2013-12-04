@@ -1,0 +1,15 @@
+{% extends "AcmeStoreBundle::layout.html.twig" %}
+
+{% block content %}
+
+<div id="wrap">
+    <div class="container">
+        <div class="alert alert-success">
+            <h1>Hello, {{ user }}!<h1>
+            <h2>Today weather<h2>
+            <h3>Temperature in {{ city }} now is {{ temperature }}</h3>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class DefaultController extends Controller
 {
@@ -76,8 +77,6 @@ class DefaultController extends Controller
         $products = $em->getRepository('AcmeStoreBundle:Product')
                   ->findByCategory($id);
 
-
-
         return $this->render('AcmeStoreBundle:Default:allProductsOfCategory.html.twig', array(
             'category' => $category,
             'products' => $products
@@ -100,6 +99,24 @@ class DefaultController extends Controller
             $executor->execute($loader->getFixtures());
 
         return $this->render('AcmeStoreBundle:Default:fixture_done.html.twig');
+    }
+
+    public function weatherAction()
+    {
+        $temperature = $this->get('weather.service')->getWeather();
+        $city = $this->get('weather.service')->getCity();
+
+        $session = $this->get('my_service')
+            ->getSession();
+
+        $user = $session->get('user');
+
+        return $this->render('AcmeStoreBundle:Default:weather.html.twig',
+            array('temperature' => $temperature,
+                'city'=>$city,
+                'user'=>$user,
+        ));
+
     }
 
 
